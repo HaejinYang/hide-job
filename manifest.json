@@ -12,15 +12,15 @@
   "content_scripts": [
     {
       "js": ["scripts/content.js"],
-      "matches": [
-        "https://developer.chrome.com/docs/extensions/*",
-        "https://developer.chrome.com/docs/webstore/*",
-        "https://www.jobkorea.co.kr/*"
-      ]
+      "matches": ["<all_urls>"],
+      "background": {
+        "scripts": ["popup.js"],
+        "persistent": false
+      }
     }
   ],
   "action": {
     "default_popup": "scripts/popup.html"
   },
-  "permissions": ["storage"]
+  "permissions": ["storage", "activeTab"]
 }

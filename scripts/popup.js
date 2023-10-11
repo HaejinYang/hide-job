@@ -14,7 +14,6 @@ document.getElementById("save").addEventListener("click", (e) => {
 const keywordsUl = document.getElementById("keywords");
 keywordsUl.addEventListener("click", (e) => {
   const keyword = e.target.id;
-  console.log(keyword);
   removeKeyword(keyword);
 });
 
@@ -23,10 +22,9 @@ keywordsUl.addEventListener("click", (e) => {
  */
 updateKeyword();
 
-function onClickDelete(keyword) {
-  console.log(keyword);
-}
-
+/**
+ * 함수
+ */
 function setKeyword(keyword) {
   if (keyword.trim() === "") {
     return;
@@ -40,10 +38,10 @@ function setKeyword(keyword) {
 
     if (!value.some((e) => e === keyword)) {
       value.push(keyword);
-      chrome.storage.local.set({ key: value });
+      chrome.storage.local.set({ key: value }).then((result) => {
+        updateKeyword();
+      });
     }
-
-    updateKeyword();
   });
 }
 
@@ -88,5 +86,15 @@ function updateKeyword() {
       li.appendChild(document.createTextNode("저장된 키워드가 없습니다."));
       keywordsUl.appendChild(li);
     }
+
+    blurJobs();
+  });
+}
+function blurJobs() {
+  chrome.storage.local.get(["key"]).then((result) => {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      // Send a message to the content script of the active tab
+      chrome.tabs.sendMessage(tabs[0].id, { data: result.key });
+    });
   });
 }
