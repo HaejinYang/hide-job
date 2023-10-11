@@ -18,5 +18,8 @@
         "https://www.jobkorea.co.kr/*"
       ]
     }
-  ]
+  ],
+  "action": {
+    "default_popup": "scripts/popup.html"
+  }
 }
