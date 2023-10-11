@@ -12,11 +12,11 @@ for (let post of posts) {
     continue;
   }
 
-  const targets = post.parentNode.querySelectorAll('p, a');
+  const targets = post.parentNode.querySelectorAll("p, a");
   console.log(targets);
-  for(let target of targets) {
-    if(target.style) {
-        target.style.color = 'white';
+  for (let target of targets) {
+    if (target.style) {
+      target.style.color = "white";
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "manifest_version": 1,
+  "manifest_version": 3,
   "name": "Hide Job",
   "version": "1.0",
   "description": "hide job posting on website",
@@ -14,7 +14,8 @@
       "js": ["scripts/content.js"],
       "matches": [
         "https://developer.chrome.com/docs/extensions/*",
-        "https://developer.chrome.com/docs/webstore/*"
+        "https://developer.chrome.com/docs/webstore/*",
+        "https://www.jobkorea.co.kr/*"
       ]
     }
   ]
