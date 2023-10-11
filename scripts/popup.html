@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <!DOCTYPE html>
+    <link href="style.css" rel="stylesheet" />
   </head>
   <body>
     <form>
-      <label for="userInput">삭제할 키워드를 입력하세요:</label>
+      <label for="userInput"><b>숨길 키워드를 입력하세요:</b></label>
       <input type="text" id="userInput" />
-      <button id="submit">저장</button>
+      <button id="save">저장</button>
     </form>
+
+    <div id="keywords-container">
+      <p><b>숨겨진 키워드</b></p>
+      <ul id="keywords"></ul>
+    </div>
     <script src="popup.js"></script>
   </body>
 </html>
