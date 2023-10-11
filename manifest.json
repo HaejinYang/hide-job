@@ -21,5 +21,6 @@
   ],
   "action": {
     "default_popup": "scripts/popup.html"
-  }
+  },
+  "permissions": ["storage"]
 }
