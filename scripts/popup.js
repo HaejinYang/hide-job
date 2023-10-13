@@ -72,12 +72,20 @@ function updateKeyword() {
       for (const keyword of keywords) {
         const li = document.createElement("li");
         let displayKeyword = keyword;
-        if (displayKeyword.length > 9) {
-          displayKeyword = displayKeyword.substring(0, 9) + "...";
+        const maxDisplayLength = 6;
+        if (displayKeyword.length > maxDisplayLength) {
+          displayKeyword =
+            displayKeyword.substring(0, maxDisplayLength) + "...";
         }
         li.innerHTML = `
-        <span> ${displayKeyword} </span>
+        <span class="keyword"> 
+          ${displayKeyword} 
+          <span class="tooltip"> 
+            ${keyword}
+          </span>
+        </span>
         <button type="button" id="${keyword}">삭제</button>
+        
       `;
         keywordsUl.appendChild(li);
       }
