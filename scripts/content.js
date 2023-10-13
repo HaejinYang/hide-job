@@ -1,8 +1,21 @@
-console.log("content.js load");
+class Page {
+  constructor() {
+    const that = this;
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+      if (message.data) {
+        const toBeHide = message.data;
+        that.#updateWithHide(toBeHide);
+      }
+    });
+  }
 
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-  if (message.data) {
-    const toBeHide = message.data;
+  update() {
+    chrome.storage.local.get(["key"]).then((result) => {
+      this.#updateWithHide(result.key);
+    });
+  }
+
+  #updateWithHide(toBeHide) {
     const posts = document.querySelectorAll(".post-list-corp");
     for (let post of posts) {
       const companyName = post.childNodes[1].getAttribute("title");
@@ -18,4 +31,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
       }
     }
   }
-});
+}
+
+const page = new Page();
+page.update();
