@@ -42,9 +42,11 @@ class Page {
             continue;
           }
 
-          const targets = post.parentNode.querySelectorAll("p, a");
+          const targets =
+            post.parentNode.querySelectorAll("p, a, span, button");
           for (let target of targets) {
             if (target.style) {
+              target.style.backgroundColor = "white";
               target.style.color = "white";
             }
           }
