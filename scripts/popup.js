@@ -53,9 +53,9 @@ function removeKeyword(keyword) {
 
     const keywords = [...result.key];
     const filtered = keywords.filter((e) => e !== keyword);
-    chrome.storage.local.set({ key: filtered });
-
-    updateKeyword();
+    chrome.storage.local.set({ key: filtered }).then((result) => {
+      updateKeyword();
+    });
   });
 }
 
@@ -102,6 +102,7 @@ function blurJobs() {
   chrome.storage.local.get(["key"]).then((result) => {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       // Send a message to the content script of the active tab
+      console.log("blur : ", result.key);
       chrome.tabs.sendMessage(tabs[0].id, { data: result.key });
     });
   });
