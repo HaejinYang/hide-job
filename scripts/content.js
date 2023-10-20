@@ -9,7 +9,11 @@ class Page {
     this.#toBeHideList = [];
     const that = this;
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-      const toBeHide = message.data;
+      let toBeHide = message.data;
+      if (!Array.isArray(toBeHide)) {
+        toBeHide = [];
+      }
+
       that.#updateInternel(toBeHide).then(() => {
         that.draw();
       });
@@ -24,6 +28,10 @@ class Page {
 
   async update() {
     const result = await chrome.storage.local.get(["key"]);
+    if (!Array.isArray(result.key)) {
+      result.key = [];
+    }
+
     this.#prevHideList = [...result.key];
     await this.#updateInternel(result.key);
   }
@@ -57,7 +65,7 @@ class Page {
       if (!this.#toBeHideList.some((e) => e === companyName)) {
         continue;
       }
-      console.log("hide", post);
+
       const targets = post.parentNode.querySelectorAll("p, a, span, button");
       for (let target of targets) {
         if (target.style) {
@@ -70,6 +78,10 @@ class Page {
 
   async #updateInternel(toBeHide) {
     const result = await chrome.storage.local.get(["key"]);
+    if (!Array.isArray(result.key)) {
+      result.key = [];
+    }
+
     // 그릴 대상
     if (!this.#isPrevHideListEqual(result.key)) {
       this.#displayTargets = this.#prevHideList.filter(
