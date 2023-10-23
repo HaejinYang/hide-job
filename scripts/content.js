@@ -7,15 +7,14 @@ class Page {
     this.#prevHideList = [];
     this.#displayTargets = [];
     this.#toBeHideList = [];
-    const that = this;
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       let toBeHide = message.data;
       if (!Array.isArray(toBeHide)) {
         toBeHide = [];
       }
 
-      that.#updateInternel(toBeHide).then(() => {
-        that.draw();
+      this.#updateInternel(toBeHide).then(() => {
+        this.draw();
       });
     });
   }

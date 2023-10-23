@@ -48,19 +48,18 @@ class PopUp {
   }
 
   #registerEventListener() {
-    const that = this;
     document.getElementById("save").addEventListener("click", (e) => {
       e.preventDefault();
       const userInput = document.getElementById("userInput").value;
       document.getElementById("userInput").value = "";
 
-      that.#setKeyword(userInput);
+      this.#setKeyword(userInput);
     });
 
     const keywordsUl = document.getElementById("keywords");
     keywordsUl.addEventListener("click", (e) => {
       const keyword = e.target.id;
-      that.#removeKeyword(keyword);
+      this.#removeKeyword(keyword);
     });
   }
 
